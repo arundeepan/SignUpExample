@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "HomePageViewController.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +18,19 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    //Uncomment this
+//    [Parse setApplicationId:<APPLICATION_ID> clientKey:<CLIENT_KEY>];
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *emailId = [userDefaults valueForKey:@"EmailID"];
+    if (emailId && emailId.length > 0){
+        UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        HomePageViewController *homePage = [storyBoard instantiateViewControllerWithIdentifier:@"homePage"];
+        UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:homePage];
+        self.window.rootViewController = navi;
+        
+    }
     return YES;
 }
 
